@@ -14,6 +14,15 @@ export default class TodosContainer extends Component {
             completed:false,
         }
     }
+    // After the todo delete response is sent back from the server, we find the corresponding entry for the todo in our todos state array and remove it.
+    deleteTodo = (todo) => {
+        TodoModel.delete(todo).then((res) => {
+            let todos = this.state.todo.filter((todo) => {
+                return todo._id !== res.data._id;
+            })
+            this.setState({todos})
+        })
+    }
     componentDidMount() {
         this.fetchData();
     }
@@ -32,7 +41,9 @@ export default class TodosContainer extends Component {
                 <CreateTodoForm 
                     createTodo={this.createTodo} />
                 <Todos
-                    todos={this.state.todos} />
+                    todos={this.state.todos}
+                    deleteTodo={this.deleteTodo} 
+                />
              </div>
         )
     }
