@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 export default class CreateTodoForm extends Component {
     state = {
-        todo = '',
+        todo : '',
     }
 // the value set for todo in this function is basically the input field's value
     onInputChange = (event) => {
@@ -33,7 +33,7 @@ export default class CreateTodoForm extends Component {
                         onChange={this.onInputChange}
                         type="text" id="newItemDescription"
                         placeholder="What do you need to do?"
-                        value="{this.state.todo"
+                        value={this.state.todo}
                     />
                     <button type="submit" className="btn" id="addTask">Add Todo</button>
                 </form>
