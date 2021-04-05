@@ -23,6 +23,20 @@ export default class TodosContainer extends Component {
             this.setState({todos})
         })
     }
+
+    updateTodo = todo => {
+        const isUpdatedTodo = t => {
+            return t._id === todo._id;
+        };
+    
+        TodoModel.update(todo)
+            .then((res) => {
+              let todos = this.state.todos;
+              todos.find(isUpdatedTodo).body = todo.body;
+              this.setState({ todos: todos });
+            });
+      };
+
     componentDidMount() {
         this.fetchData();
     }
@@ -41,8 +55,9 @@ export default class TodosContainer extends Component {
                 <CreateTodoForm 
                     createTodo={this.createTodo} />
                 <Todos
-                    todos={this.state.todos}
-                    deleteTodo={this.deleteTodo} 
+                    todos={ this.state.todos }
+                    updateTodo={ this.updateTodo } 
+                    deleteTodo={ this.deleteTodo }
                 />
              </div>
         )

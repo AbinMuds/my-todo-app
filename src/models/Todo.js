@@ -19,6 +19,11 @@ class TodoModel{
         let request = axios.get(endPoint);
         return request
     }
+
+    static update = (todo) => {
+        let request = axios.put(`${endPoint}/${todo._id}`, todo);
+        return request;
+    };
 }
 
 export default TodoModel;
